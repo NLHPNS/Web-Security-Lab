@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Security Lab</title>
+</head>
+
+<body>
+    <h1>Login</h1>
+
+    <p>User name</p>
+    <input type="text" id="userName">
+
+    <p>Password</p>
+    <input type="password" id="pwd">
+
+    <button id="loginButton">Login</button>
+
+    <script>
+        const userNameInput = document.getElementById("userName");
+        const thePasswordInput = document.getElementById("pwd");
+        const theButton = document.getElementById("loginButton");
+
+        theButton.addEventListener("click", login);
+
+        
+
+        async function login(){ // async comes with await
+            const userName = userNameInput.value;
+            const thePassword = thePasswordInput.value;
+
+
+            const response = await fetch("/login", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    userName: userName,
+                    thePassword: thePassword
+                })
+
+            });
+
+            const result = await response.json();
+
+            alert(result.message);
+
+        }
+    </script>
+</body>
+</html>
