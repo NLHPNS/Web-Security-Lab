@@ -14,8 +14,11 @@ const user = {
 app.post("/login", (req, res) => {
     console.log(req.body);
 
-    if (req.body.userName === user.userName &&
-        req.body.thePassword === user.thePassword
+    const userName = req.body.userName;
+    const thePassword = req.body.thePassword;
+
+    if (userName === user.userName &&
+        thePassword === user.thePassword
     ) {
         res.status(200).json({
             message: "Login successful"
