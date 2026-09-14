@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/NLHPNS/Web-Security-Lab#readme",
   "dependencies": {
+    "argon2": "^0.45.1",
     "express": "^5.2.1"
   },
   "type": "module"

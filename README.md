@@ -14,3 +14,7 @@ I added index.html for the front-end website.
 ### Day 2
 I have installed npm and express for back-end server.
 I added Server.js.
+
+### Day 3
+I installed argon2 for hashing password to make the server secure.
+I implemented Register for the website.
