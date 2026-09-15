@@ -26,21 +26,47 @@ const users = [
 
 
 app.post("/register", async (req, res) => {
-    console.log(req.body);
-    console.log(67);
+    console.log(users);
+
     const userName = req.body.userName;
     const thePassword = req.body.thePassword;
 
-    const passwordHash = await argon2.hash(thePassword);
+    // check empty input
+    if (!userName || !thePassword) {
+        res.status(400).json({
+            message: "Missing user name/password"
+        });
+        return;
+    }
 
-    users.push({
-        userName: userName,
-        thePassword: passwordHash
-    });
+    // check password length
+    if (thePassword.length < 8) {
+        res.status(400).json({
+            message: "Password length should be >= 8"
+        });
+        return;
+    }
 
-    res.status(201).json({
-        message: "Registeration successful"
-    });
+    // check repeated user name
+    if (!users.find(u => u.userName === userName)) {
+        const passwordHash = await argon2.hash(thePassword);
+
+        users.push({
+            userName: userName,
+            thePassword: passwordHash
+        });
+
+        res.status(201).json({
+            message: "Registration successful"
+        });
+
+    } else {
+        res.status(400).json({
+            message: "Registration failed"
+        });
+
+    }
+    
 });
 
 

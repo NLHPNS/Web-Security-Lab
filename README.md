@@ -18,3 +18,7 @@ I added Server.js.
 ### Day 3
 I installed argon2 for hashing password to make the server secure.
 I implemented Register for the website.
+
+### Day 4
+I optimized the registration, added code for checking repeated user name, empty
+input as well as short password.
