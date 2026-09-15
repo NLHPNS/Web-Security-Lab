@@ -28,13 +28,21 @@ const users = [
 app.post("/register", async (req, res) => {
     console.log(users);
 
-    const userName = req.body.userName;
-    const thePassword = req.body.thePassword;
+    const userName = req.body.userName.trim();
+    const thePassword = req.body.thePassword.trim();
 
     // check empty input
     if (!userName || !thePassword) {
         res.status(400).json({
             message: "Missing user name/password"
+        });
+        return;
+    }
+
+    // check input type
+    if (typeof userName !== "string" || typeof thePassword !== "string") {
+        res.status(400).json({
+            message: "User name and password must be string"
         });
         return;
     }
@@ -73,8 +81,15 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
     console.log(req.body);
 
-    const userName = req.body.userName;
-    const thePassword = req.body.thePassword;
+    const userName = req.body.userName.trim();
+    const thePassword = req.body.thePassword.trim();
+
+    if (typeof(userName) !== "string" || typeof(thePassword) !== "string") {
+        res.status(400).json({
+            message: "User name and password must be string"
+        });
+        return;
+    }
 
     const user = users.find(
         u => u.userName === userName
